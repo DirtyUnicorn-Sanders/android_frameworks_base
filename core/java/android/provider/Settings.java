@@ -4125,6 +4125,8 @@ public final class Settings {
          */
         public static final String CUSTOM_BUTTON_BRIGHTNESS = "custom_button_brightness";
 
+        /** Beginning of ABC custom setttings**/
+
         /**
          * use same value for buttons as for screen (manual and auto mode)
          *
@@ -4155,6 +4157,12 @@ public final class Settings {
          * @hide
          */
         public static final String STATUS_BAR_QUICK_QS_PULLDOWN = "status_bar_quick_qs_pulldown";
+
+      	/**
+         * show the membar in recents
+         *  @hide
+         */
+        public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to

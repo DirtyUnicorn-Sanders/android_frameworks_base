@@ -63,4 +63,6 @@
 
     <dimen name="qs_corner_content_padding">8dp</dimen>
 
+    <dimen name="recents_membar_spacing">12dp</dimen>
+
 </resources>
