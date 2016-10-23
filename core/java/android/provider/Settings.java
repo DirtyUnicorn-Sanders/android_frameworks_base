@@ -4647,8 +4647,16 @@ public final class Settings {
         public static final String SCREENSHOT_EDIT_USER_APP = "screenshot_edit_user_app";
 
         /**
-         * Hold current font name and name of the originating package Uses "|" as a delimiter
-         *
+         * Whether allowing pocket service to register sensors and dispatch informations.
+         *   0 = disabled
+         *   1 = enabled
+         * @author Carlo Savignano
+         * @hide
+         */
+        public static final String POCKET_JUDGE = "pocket_judge";
+
+        /**
+         * Whether to use the MTP by default after connecting to PC
          * @hide
          */
         public static final String FONT_INFO = "font_info";
