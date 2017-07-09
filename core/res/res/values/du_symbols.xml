@@ -192,4 +192,7 @@
   <!-- Custom clocks -->
   <java-symbol type="string" name="custom_clock_styles" />
 
+  <!-- Sensor-block package -->
+  <java-symbol type="array" name="config_blockPackagesSensorDrain" />
+
 </resources>
