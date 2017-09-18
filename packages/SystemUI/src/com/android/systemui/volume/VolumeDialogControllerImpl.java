@@ -112,6 +112,9 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     private boolean mDestroyed;
     private VolumePolicy mVolumePolicy;
     private boolean mShowDndTile = true;
+
+    private ToneGenerator mToneGenerators[];
+
     @GuardedBy("this")
     private UserActivityListener mUserActivityListener;
 
@@ -655,7 +658,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         private static final int PLAY_SOUND = 16;
         private static final int STOP_SOUNDS = 17;
         private static final int FREE_RESOURCES = 18;
-
         W(Looper looper) {
             super(looper);
         }
@@ -677,10 +679,10 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
                 case NOTIFY_VISIBLE: onNotifyVisibleW(msg.arg1 != 0); break;
                 case USER_ACTIVITY: onUserActivityW(); break;
                 case SHOW_SAFETY_WARNING: onShowSafetyWarningW(msg.arg1); break;
-                case ACCESSIBILITY_MODE_CHANGED: onAccessibilityModeChanged((Boolean) msg.obj);
+                case ACCESSIBILITY_MODE_CHANGED: onAccessibilityModeChanged((Boolean) msg.obj); break;
                 case PLAY_SOUND: onPlaySoundW(msg.arg1, msg.arg2); break;
                 case STOP_SOUNDS: onStopSoundsW(); break;
-                case FREE_RESOURCES: onFreeResourcesW(); break;
+                case FREE_RESOURCES: onFreeResourcesW();
             }
         }
     }
@@ -823,6 +825,12 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     }
 
     protected void onPlaySoundW(int streamType, int flags) {
+
+      // If preference is no sound - just exit here
+        if (Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.VOLUME_ADJUST_SOUNDS_ENABLED, 1) == 0) {
+            return;
+        }
 
         if (mWorker.hasMessages(W.STOP_SOUNDS)) {
             mWorker.removeMessages(W.STOP_SOUNDS);
