@@ -29,6 +29,8 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.view.IWindowManager;
+import android.view.WindowManagerGlobal;
 
 import com.android.internal.R;
 import com.android.internal.statusbar.IStatusBarService;
@@ -78,6 +80,15 @@ public class Utils {
                             ServiceManager.getService("statusbar"));
                 }
                 return mStatusBarService;
+            }
+        }
+
+ 	public static void takeScreenrecord(int mode) {
+            IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+            try {
+                wm.screenRecordAction(mode);
+            } catch (RemoteException e) {
+                e.printStackTrace();
             }
         }
 
