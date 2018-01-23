@@ -168,4 +168,6 @@
     <string name="screenrecord_notif_final_ticker">Screen recorded successfully</string> 
     <string name="screenrecord_notif_completed">Screen recorded successfully</string>
 
+    <string name="screenrecord_notif_duration">Total:</string>
+
 </resources>
