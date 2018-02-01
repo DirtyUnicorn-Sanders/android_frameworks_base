@@ -35,6 +35,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
+import android.graphics.PorterDuff.Mode;
 import android.content.ContentResolver;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -595,6 +596,8 @@ public class RecentsView extends FrameLayout {
         }
         mMemText.setVisibility(View.VISIBLE);
         mMemBar.setVisibility(View.VISIBLE);
+
+        mMemBar.getProgressDrawable().setColorFilter(mContext.getResources().getColor(R.color.fab_color), Mode.MULTIPLY);
 
         updateMemoryStatus();
         return true;
