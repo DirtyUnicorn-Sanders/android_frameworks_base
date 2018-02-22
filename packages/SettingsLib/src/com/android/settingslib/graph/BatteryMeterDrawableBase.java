@@ -684,43 +684,7 @@ public class BatteryMeterDrawableBase extends Drawable {
         }
     }
 
-    // Some stuff required by Drawable.
-    @Override
-    public void setAlpha(int alpha) {
-    }
-
-    @Override
-    public void setColorFilter(@Nullable ColorFilter colorFilter) {
-        mFramePaint.setColorFilter(colorFilter);
-        mBatteryPaint.setColorFilter(colorFilter);
-        mWarningTextPaint.setColorFilter(colorFilter);
-        mBoltPaint.setColorFilter(colorFilter);
-        mPlusPaint.setColorFilter(colorFilter);
-    }
-
-    @Override
-    public int getOpacity() {
-        return 0;
-    }
-
-    public int getCriticalLevel() {
-        return mCriticalLevel;
-    }
-
-    protected float getAspectRatio() {
-        if (mMeterStyle != BATTERY_STYLE_PORTRAIT
-                && mMeterStyle != BATTERY_STYLE_LANDSCAPE) {
-            return CIRCLE_ASPECT_RATIO;
-        }
-        return ASPECT_RATIO;
-    }
-
-    protected float getRadiusRatio() {
-        return RADIUS_RATIO;
-    }
-
-
- private void drawSquare(Canvas c) {
+    private void drawSquare(Canvas c) {
         final int level = mLevel;
         final int height = mHeight;
         final int width = (int) (getAspectRatio() * mHeight);
@@ -733,7 +697,7 @@ public class BatteryMeterDrawableBase extends Drawable {
         // pad circle percentage to 100% once it reaches 97%
         // for one, the circle looks odd with a too small gap,
         // for another, some phones never reach 100% due to hardware design
-       int padLevel = level;
+        int padLevel = level;
         if (padLevel >= 97) {
             padLevel = 100;
         } else if (padLevel <= 3) {
@@ -747,12 +711,6 @@ public class BatteryMeterDrawableBase extends Drawable {
         mBatteryPaint.setStrokeWidth(strokeWidth);
         mBatteryPaint.setStyle(Paint.Style.STROKE);
         mBatteryPaint.setPathEffect(null);
-
-        if (mMeterStyle == BATTERY_STYLE_DOTTED_SQUARE) {
-            mBatteryPaint.setPathEffect(mSquarePathEffect);
-        } else {
-            mBatteryPaint.setPathEffect(null);
-        }
 
         mFrame.set(
                 strokeWidth/2,
@@ -869,4 +827,39 @@ public class BatteryMeterDrawableBase extends Drawable {
             }
         }
     }
- }
+
+    // Some stuff required by Drawable.
+    @Override
+    public void setAlpha(int alpha) {
+    }
+
+    @Override
+    public void setColorFilter(@Nullable ColorFilter colorFilter) {
+        mFramePaint.setColorFilter(colorFilter);
+        mBatteryPaint.setColorFilter(colorFilter);
+        mWarningTextPaint.setColorFilter(colorFilter);
+        mBoltPaint.setColorFilter(colorFilter);
+        mPlusPaint.setColorFilter(colorFilter);
+    }
+
+    @Override
+    public int getOpacity() {
+        return 0;
+    }
+
+    public int getCriticalLevel() {
+        return mCriticalLevel;
+    }
+
+    protected float getAspectRatio() {
+        if (mMeterStyle != BATTERY_STYLE_PORTRAIT
+                && mMeterStyle != BATTERY_STYLE_LANDSCAPE) {
+            return CIRCLE_ASPECT_RATIO;
+        }
+        return ASPECT_RATIO;
+    }
+
+    protected float getRadiusRatio() {
+        return RADIUS_RATIO;
+    }
+}
