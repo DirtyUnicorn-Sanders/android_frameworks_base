@@ -4853,8 +4853,15 @@ public final class Settings {
         public static final String LOCKSCREEN_INDICATION_TEXT_COLOR = "lockscreen_indication_text_color";
 
         /**
-         * Change the color of the lockscreen clock
+         * Whether to show the kill app button in notification guts
          *
+         * @hide
+         */
+        public static final String NOTIFICATION_GUTS_KILL_APP_BUTTON =
+                "notification_guts_kill_app_button";
+
+        /**
+         * Whether to gently vibrate instead of playin a sound when in-call and a notification is pushed
          * @hide
          */
         public static final String LOCKSCREEN_CLOCK_COLOR = "lockscreen_clock_color";
