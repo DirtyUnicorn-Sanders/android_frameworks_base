@@ -192,7 +192,7 @@ class ZygoteConnection {
             }
         }
 
-        if (parsedArgs.refreshFont) {
+        if (parsedArgs.refreshTheme) {
             Typeface.recreateDefaults();
         }
 
@@ -595,8 +595,8 @@ class ZygoteConnection {
                     preloadPackageCacheKey = args[++curArg];
                 } else if (arg.equals("--preload-default")) {
                     preloadDefault = true;
-                } else if (arg.equals("--refresh-font")) {
-                    refreshFont = true;
+                } else if (arg.equals("--refresh_theme")) {
+                    refreshTheme = true;
                 } else {
                     break;
                 }
