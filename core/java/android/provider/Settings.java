@@ -4541,9 +4541,18 @@ public final class Settings {
         public static final String STATUS_BAR_LOGO = "status_bar_logo";
 
          /**
-         * Whether to display cross sign for a data disabled connection
+         * Change the color of the lockscreen bottom camera shortcut
          * @hide
          */
+        public static final String HIDE_LOCKSCREEN_STATUS_BAR = "hide_lockscreen_status_bar";
+
+        /**
+         * Hide lockscreen indicator text
+         *
+         * @hide
+         */
+        public static final String HIDE_LOCKSCREEN_INDICATOR_DISPLAY = "hide_lockscreen_indicator_display";
+
         public static final String DATA_DISABLED_ICON = "data_disabled_icon";
 
 	/**
@@ -5199,6 +5208,8 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_DISPLAY);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_STYLE);
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_STATUS_BAR);
+            PRIVATE_SETTINGS.add(HIDE_LOCKSCREEN_INDICATOR_DISPLAY);
         }
 
         /**
@@ -6914,11 +6925,6 @@ public final class Settings {
          */
         public static final String LOCK_SCREEN_ALLOW_REMOTE_INPUT =
                 "lock_screen_allow_remote_input";
-
-        /**
-         * @hide
-         */
-        public static final String LOCK_HIDE_STATUS_BAR = "lockscreen_hide_status_bar";
 
         /**
          * Set by the system to track if the user needs to see the call to action for
