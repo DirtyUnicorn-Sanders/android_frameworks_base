@@ -35,6 +35,7 @@ import android.view.WindowManagerGlobal;
 import com.android.internal.R;
 import com.android.internal.statusbar.IStatusBarService;
 
+import java.util.List;
 import java.util.Locale;
 
 public class Utils {
@@ -62,9 +63,19 @@ public class Utils {
         return true;
     }
 
+    public static void takeScreenrecord(int mode) {
+        IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
+        try {
+            wm.screenRecordAction(mode);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean isPackageInstalled(Context context, String pkg) {
         return isPackageInstalled(context, pkg, true);
     }
+
 
     // Toggle flashlight
     public static void toggleFlashLight() {
@@ -80,15 +91,6 @@ public class Utils {
                             ServiceManager.getService("statusbar"));
                 }
                 return mStatusBarService;
-            }
-        }
-
- 	public static void takeScreenrecord(int mode) {
-            IWindowManager wm = WindowManagerGlobal.getWindowManagerService();
-            try {
-                wm.screenRecordAction(mode);
-            } catch (RemoteException e) {
-                e.printStackTrace();
             }
         }
 
@@ -157,3 +159,4 @@ public class Utils {
         }
     }
 }
+	
