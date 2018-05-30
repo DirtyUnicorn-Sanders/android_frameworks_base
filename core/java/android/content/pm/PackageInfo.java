@@ -286,6 +286,8 @@ public class PackageInfo implements Parcelable {
     /** @hide */
     public int overlayPriority;
 
+    /** @hide */
+    public boolean isStaticOverlay;
 
     /**
      * Flag for use with {@link #overlayFlags}. Marks the overlay as static, meaning it cannot

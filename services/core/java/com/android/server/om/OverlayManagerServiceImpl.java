@@ -107,11 +107,11 @@ final class OverlayManagerServiceImpl {
                 mSettings.init(overlayPackage.packageName, newUserId,
                         overlayPackage.overlayTarget,
                         overlayPackage.applicationInfo.getBaseCodePath(),
-                        isPackageStaticOverlay(overlayPackage), overlayPackage.overlayPriority);
+                        overlayPackage.isStaticOverlay, overlayPackage.overlayPriority);
 
                 if (oi == null) {
                     // This overlay does not exist in our settings.
-                    if (isPackageStaticOverlay(overlayPackage) ||
+                    if (overlayPackage.isStaticOverlay ||
                             mDefaultOverlays.contains(overlayPackage.packageName)) {
                         // Enable this overlay by default.
                         if (DEBUG) {
@@ -256,12 +256,13 @@ final class OverlayManagerServiceImpl {
             return;
         }
 
+
         final PackageInfo targetPackage =
                 mPackageManager.getPackageInfo(overlayPackage.overlayTarget, userId);
 
         mSettings.init(packageName, userId, overlayPackage.overlayTarget,
-                overlayPackage.applicationInfo.getBaseCodePath(),
-                isPackageStaticOverlay(overlayPackage), overlayPackage.overlayPriority);
+                overlayPackage.applicationInfo.getBaseCodePath(), overlayPackage.isStaticOverlay,
+                overlayPackage.overlayPriority);
         try {
             if (updateState(targetPackage, overlayPackage, userId)) {
                 mListener.onOverlaysChanged(overlayPackage.overlayTarget, userId);
