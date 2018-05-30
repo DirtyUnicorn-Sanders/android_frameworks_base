@@ -345,7 +345,6 @@ final class OverlayManagerSettings {
             pw.print("mState.............: "); pw.println(OverlayInfo.stateToString(item.getState()));
             pw.print("mIsEnabled.........: "); pw.println(item.isEnabled());
             pw.print("mIsStatic..........: "); pw.println(item.isStatic());
-            pw.print("mIsAccent..........: "); pw.println(item.isAccent());
             pw.print("isUpgrading........: "); pw.println(item.isUpgrading());
 
             pw.decreaseIndent();
@@ -430,7 +429,7 @@ final class OverlayManagerSettings {
             final boolean isUpgrading = XmlUtils.readBooleanAttribute(parser, ATTR_IS_UPGRADING);
 
             return new SettingsItem(packageName, userId, targetPackageName, baseCodePath, state,
-                    isEnabled, isStatic, isAccent, priority, isUpgrading);
+                    isEnabled, isStatic, priority, isUpgrading);
         }
 
         public static void persist(@NonNull final ArrayList<SettingsItem> table,
@@ -482,7 +481,7 @@ final class OverlayManagerSettings {
         SettingsItem(@NonNull final String packageName, final int userId,
                 @NonNull final String targetPackageName, @NonNull final String baseCodePath,
                 final int state, final boolean isEnabled, final boolean isStatic,
-                final boolean isAccent, final int priority, final boolean isUpgrading) {
+                final int priority, final boolean isUpgrading) {
             mPackageName = packageName;
             mUserId = userId;
             mTargetPackageName = targetPackageName;
@@ -499,7 +498,7 @@ final class OverlayManagerSettings {
                 @NonNull final String targetPackageName, @NonNull final String baseCodePath,
                 final boolean isStatic, final int priority) {
             this(packageName, userId, targetPackageName, baseCodePath, OverlayInfo.STATE_UNKNOWN,
-                    false, isStatic, isAccent, priority, false);
+                    false, isStatic, priority, false);
         }
 
         private String getTargetPackageName() {

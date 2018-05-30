@@ -612,8 +612,6 @@ public class ActivityManagerService extends IActivityManager.Stub
     private static final String PROP_REFRESH_FONT = "sys.refresh_font";
 
     /* Freq Aggr boost objects */
-    public static BoostFramework sFreqAggr_init = null;
-    public static BoostFramework sFreqAggr = null;
     public static boolean sIsFreqAggrBoostSet = false;
     private boolean mIsFreqAggrEnabled = false;
     private int lFreqAggr_TimeOut = 0;
@@ -621,7 +619,6 @@ public class ActivityManagerService extends IActivityManager.Stub
     private int lFreqAggr_ParamVal[];
 
     /* Launch boost v2 objects */
-    public static BoostFramework sPerfBoost_v2 = null;
     public static boolean sIsLaunchBoostv2_set = false;
     private boolean mIsLaunchBoostv2_enabled = false;
     private int lBoost_v2_TimeOut = 0;
