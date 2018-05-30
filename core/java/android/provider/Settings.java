@@ -8373,6 +8373,18 @@ public final class Settings {
 
         /**
          * Display large battery icon.
+         * Force authorize Substratum (or equivalent) frontend calling packages by ThemeInterfacer
+         * The value is boolean (1 or 0).
+         * @hide
+         */
+        public static final String FORCE_AUTHORIZE_SUBSTRATUM_PACKAGES = "force_authorize_substratum_packages";
+
+        /**
+         * Whether to set a lower brightness level when enabling night mode
+         * 0: Disabled
+         * 1: Set the brightness to a very low value
+         * 2: Set the brightness to a low value
+         * 3: Set the brightness to a medium value
          * @hide
          */
         public static final String STATUS_BAR_BIG_BATTERY_ICON = "status_bar_big_battery_icon";
