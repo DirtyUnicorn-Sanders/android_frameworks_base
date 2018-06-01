@@ -5217,6 +5217,7 @@ public class AudioService extends IAudioService.Stub
                     Settings.System.VOLUME_KEYS_CONTROL_MEDIA_STREAM), false, this);
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.HEADSET_CONNECT_PLAYER), false, this);
+            mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.VOLUME_LINK_NOTIFICATION), false, this);
         }
 
