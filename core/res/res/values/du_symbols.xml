@@ -179,13 +179,6 @@
   <java-symbol type="drawable" name="ic_audio_notification_new" />
   <java-symbol type="drawable" name="ic_audio_notification_mute_new" />
 
-  <!-- Round corner wifi icons -->
-  <java-symbol type="drawable" name="ic_wifi_signal_round_0" />
-  <java-symbol type="drawable" name="ic_wifi_signal_round_1" />
-  <java-symbol type="drawable" name="ic_wifi_signal_round_2" />
-  <java-symbol type="drawable" name="ic_wifi_signal_round_3" />
-  <java-symbol type="drawable" name="ic_wifi_signal_round_4" />
-
   <!-- Screenrecord -->
   <java-symbol type="bool" name="config_enableScreenrecordChord" />
 
