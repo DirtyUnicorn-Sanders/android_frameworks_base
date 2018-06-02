@@ -6400,6 +6400,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
 
     private boolean isHwKeysDisabled() {
         return mKeyHandler != null ? mKeyHandler.isHwKeysDisabled() : false;
+        }
     // Assume this is called from the Handler thread.
     private void takeScreenrecord() {
         synchronized (mScreenrecordLock) {
