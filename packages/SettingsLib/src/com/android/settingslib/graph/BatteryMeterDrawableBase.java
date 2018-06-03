@@ -47,12 +47,13 @@ public class BatteryMeterDrawableBase extends Drawable {
 
     // Values for the different battery styles
     public static final int BATTERY_STYLE_PORTRAIT = 0;
-    public static final int BATTERY_STYLE_LANDSCAPE = 1;
-    public static final int BATTERY_STYLE_CIRCLE = 2;
-    public static final int BATTERY_STYLE_DOTTED_CIRCLE = 3;
-    public static final int BATTERY_STYLE_SQUARE = 5;
-    public static final int BATTERY_STYLE_TEXT = 6;
-    public static final int BATTERY_STYLE_HIDDEN = 7;
+    public static final int BATTERY_STYLE_CIRCLE = 1;
+    public static final int BATTERY_STYLE_DOTTED_CIRCLE = 2;
+    public static final int BATTERY_STYLE_SQUARE = 3;
+    public static final int BATTERY_STYLE_TEXT = 4;
+    public static final int BATTERY_STYLE_HIDDEN = 5;
+    public static final int BATTERY_STYLE_DOTTED_SQUARE = 6;
+    public static final int BATTERY_STYLE_LANDSCAPE = 7;
 
     protected final Context mContext;
     protected final Paint mFramePaint;
@@ -106,7 +107,7 @@ public class BatteryMeterDrawableBase extends Drawable {
     private final Path mClipPath = new Path();
     private final Path mTextPath = new Path();
 
-    private DashPathEffect mPathEffect;
+    private DashPathEffect mPathEffect, mSquarePathEffect;
 
     public BatteryMeterDrawableBase(Context context, int frameColor) {
         mContext = context;
@@ -166,7 +167,8 @@ public class BatteryMeterDrawableBase extends Drawable {
         mPlusPaint = new Paint(mBoltPaint);
         mPlusPoints = loadPoints(res, R.array.batterymeter_plus_points);
 
-        mPathEffect = new DashPathEffect(new float[]{3,2},0);
+        mPathEffect = new DashPathEffect(new float[]{3,2}, 0);
+        mSquarePathEffect = new DashPathEffect(new float[]{3,3}, 3);
 
         mIntrinsicWidth = context.getResources().getDimensionPixelSize(R.dimen.battery_width);
         mIntrinsicHeight = context.getResources().getDimensionPixelSize(R.dimen.battery_height);
@@ -333,6 +335,7 @@ public class BatteryMeterDrawableBase extends Drawable {
                 drawCircle(c);
                 break;
             case BATTERY_STYLE_SQUARE:
+            case BATTERY_STYLE_DOTTED_SQUARE:
                 drawSquare(c);
                 break;
             case BATTERY_STYLE_PORTRAIT:
@@ -744,6 +747,12 @@ public class BatteryMeterDrawableBase extends Drawable {
         mBatteryPaint.setStrokeWidth(strokeWidth);
         mBatteryPaint.setStyle(Paint.Style.STROKE);
         mBatteryPaint.setPathEffect(null);
+
+        if (mMeterStyle == BATTERY_STYLE_DOTTED_SQUARE) {
+            mBatteryPaint.setPathEffect(mSquarePathEffect);
+        } else {
+            mBatteryPaint.setPathEffect(null);
+        }
 
         mFrame.set(
                 strokeWidth/2,
