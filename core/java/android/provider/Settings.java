@@ -4508,6 +4508,12 @@ public final class Settings {
          */
         public static final String STATUS_BAR_LOGO = "status_bar_logo";
 
+         /**
+         * Whether to display cross sign for a data disabled connection
+         * @hide
+         */
+        public static final String DATA_DISABLED_ICON = "data_disabled_icon";
+
         /**
          * Show or hide clock
          * 0 - hide
