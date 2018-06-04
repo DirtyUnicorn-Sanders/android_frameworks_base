@@ -34,6 +34,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.util.Log;
 import android.util.Slog;
 import android.util.TypedValue;
@@ -224,9 +225,14 @@ public class KeyguardStatusView extends GridLayout {
         mDeadPoolClockView.setLayoutParams(deadpoollayoutParams);
 
         // DateView
-        mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
+        mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(
+                mDateSelection == 0 ? R.dimen.widget_label_font_size : R.dimen.widget_label_custom_font_size));
         mDateView.setTypeface(tf);
+
+        // AlarmStatusView
+        mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(
+                mDateSelection == 0 ? R.dimen.widget_label_font_size : R.dimen.widget_label_custom_font_size));
+        mAlarmStatusView.setTypeface(tf);
 
         // OwnerInfo
         if (mOwnerInfo != null) {
@@ -234,7 +240,7 @@ public class KeyguardStatusView extends GridLayout {
                     getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
             mOwnerInfo.setTypeface(tf);
         }
-        mAlarmStatusView.setTypeface(tf);
+
     }
 
     public void refreshTime() {
@@ -407,12 +413,14 @@ public class KeyguardStatusView extends GridLayout {
             default:
                 params.addRule(RelativeLayout.BELOW, R.id.clock_view);
                 mClockView.setSingleLine(true);
+                mClockView.setGravity(Gravity.CENTER);
                 mAnalogClockView.unregisterReceiver();
                 mDeadPoolClockView.unregisterReceiver();
                 break;
             case 1: // digital (bold)
                 params.addRule(RelativeLayout.BELOW, R.id.clock_view);
                 mClockView.setSingleLine(true);
+                mClockView.setGravity(Gravity.CENTER);
                 mAnalogClockView.unregisterReceiver();
                 mDeadPoolClockView.unregisterReceiver();
                 break;
@@ -429,32 +437,55 @@ public class KeyguardStatusView extends GridLayout {
             case 4: // sammy
                 params.addRule(RelativeLayout.BELOW, R.id.clock_view);
                 mClockView.setSingleLine(false);
+                mClockView.setGravity(Gravity.CENTER);
                 mAnalogClockView.unregisterReceiver();
                 mDeadPoolClockView.unregisterReceiver();
                 break;
             case 5: // sammy (bold)
                 params.addRule(RelativeLayout.BELOW, R.id.clock_view);
                 mClockView.setSingleLine(false);
+                mClockView.setGravity(Gravity.CENTER);
                 mAnalogClockView.unregisterReceiver();
                 mDeadPoolClockView.unregisterReceiver();
                 break;
         }
 
         switch (mDateSelection) {
-            case 0: // default
+            case 0: // default aosp
             default:
                 mDateView.setBackgroundResource(0);
                 mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
                 mDateView.setPadding(0,0,0,0);
                 break;
-            case 1: // semi-transparent box
+            case 1: // default but bigger size
+                mDateView.setBackgroundResource(0);
+                mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
+                mDateView.setPadding(0,0,0,0);
+                break;
+            case 2: // semi-transparent box
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
                 mDateView.setPadding(40,20,40,20);
                 break;
-            case 2: // semi-transparent box (round)
+            case 3: // semi-transparent box (round)
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
+                mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
+                mAlarmStatusView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                        getResources().getDimensionPixelSize(R.dimen.widget_label_custom_font_size));
                 mDateView.setPadding(40,20,40,20);
                 break;
         }
