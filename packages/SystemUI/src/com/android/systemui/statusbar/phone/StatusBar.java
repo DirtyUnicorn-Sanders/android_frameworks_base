@@ -3130,7 +3130,11 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     public boolean isPulsing() {
-        return mDozeScrimController.isPulsing();
+        return mDozeScrimController != null ? mDozeScrimController.isPulsing() : false;
+    }
+
+    public DozeScrimController getDozeScrimController() {
+        return mDozeScrimController;
     }
 
     @Override
@@ -6116,7 +6120,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                     callback.onPulseStarted();
                     Collection<HeadsUpManager.HeadsUpEntry> pulsingEntries =
                             mHeadsUpManager.getAllEntries();
-                    if (!pulsingEntries.isEmpty()) {
+                    if (!pulsingEntries.isEmpty() && reason != DozeLog.PULSE_REASON_FORCED_MEDIA_NOTIFICATION) {
                         // Only pulse the stack scroller if there's actually something to show.
                         // Otherwise just show the always-on screen.
                         setPulsing(pulsingEntries);
@@ -6230,14 +6234,11 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         @Override
         public void onDoubleTap(float screenX, float screenY) {
-            if (screenX > 0 && screenY > 0 && mAmbientIndicationContainer != null
-                && mAmbientIndicationContainer.getVisibility() == View.VISIBLE) {
-                mAmbientIndicationContainer.getLocationOnScreen(mTmpInt2);
-                float viewX = screenX - mTmpInt2[0];
-                float viewY = screenY - mTmpInt2[1];
-                if (0 <= viewX && viewX <= mAmbientIndicationContainer.getWidth()
-                        && 0 <= viewY && viewY <= mAmbientIndicationContainer.getHeight()) {
-                    dispatchDoubleTap(viewX, viewY);
+            if (isDoubleTapOnMusicTicker(screenX, screenY)) {
+                handleSystemKey(KeyEvent.KEYCODE_MEDIA_NEXT);
+            } else {
+                for (Callback callback : mCallbacks) {
+                    callback.wakeUpFromDoubleTapAod();
                 }
             }
         }
@@ -6276,6 +6277,22 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     public boolean shouldIgnoreTouch() {
         return isDozing() && mDozeServiceHost.mIgnoreTouchWhilePulsing;
+    }
+
+    public boolean isDoubleTapOnMusicTicker(float eventX, float eventY) {
+        if (eventX <= 0 || eventY <= 0 || mAmbientIndicationContainer == null
+                || mAmbientIndicationContainer.getVisibility() != View.VISIBLE) {
+            return false;
+        }
+        final View indication = ((AmbientIndicationContainer)mAmbientIndicationContainer).getIndication();
+        indication.getLocationOnScreen(mTmpInt2);
+        float viewX = eventX - mTmpInt2[0];
+        float viewY = eventY - mTmpInt2[1];
+        if (0 <= viewX && viewX <= indication.getWidth()
+                && 0 <= viewY && viewY <= indication.getHeight()) {
+            return true;
+        }
+        return false;
     }
 
     // Begin Extra BaseStatusBar methods.
