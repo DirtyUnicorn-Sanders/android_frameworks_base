@@ -120,8 +120,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
 
     protected final VC mVolumeController = new VC();
 
-    private ToneGenerator mToneGenerators[];
-
     public VolumeDialogControllerImpl(Context context) {
         mContext = context.getApplicationContext();
         Events.writeEvent(mContext, Events.EVENT_COLLECTION_STARTED);
