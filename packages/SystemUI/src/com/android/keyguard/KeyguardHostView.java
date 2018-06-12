@@ -65,6 +65,7 @@ public class KeyguardHostView extends FrameLayout implements SecurityCallback {
     private OnDismissAction mDismissAction;
     private Runnable mCancelAction;
     private KeyguardUpdateMonitor mKeyguardUpdateMonitor;
+    private KeyguardUpdateMonitor mKeyguardUpdateMonitor;
 
     private final KeyguardUpdateMonitorCallback mUpdateCallback =
             new KeyguardUpdateMonitorCallback() {
@@ -127,6 +128,7 @@ public class KeyguardHostView extends FrameLayout implements SecurityCallback {
 
     public KeyguardHostView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mKeyguardUpdateMonitor = KeyguardUpdateMonitor.getInstance(context);
         KeyguardUpdateMonitor.getInstance(context).registerCallback(mUpdateCallback);
     }
 
