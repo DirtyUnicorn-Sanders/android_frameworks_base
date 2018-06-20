@@ -678,6 +678,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             final String currentPkg = mMediaController.getPackageName().toLowerCase();
             if (mSlimRecents != null) {
                 mSlimRecents.setMediaPlaying(true, currentPkg);
+            } else {
+                mRecents.setMediaPlaying(true, currentPkg);
             }
             for (String packageName : mNavMediaArrowsExcludeList) {
                 if (currentPkg.contains(packageName)) {
@@ -698,6 +700,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             }
             if (mSlimRecents != null) {
                 mSlimRecents.setMediaPlaying(false, "");
+            } else {
+                mRecents.setMediaPlaying(false, "");
             }
         }
     }
@@ -719,7 +723,7 @@ public class StatusBar extends SystemUI implements DemoMode,
     }
 
     public void triggerAmbientForMedia() {
-        if (mAmbientMediaPlaying == 2 || mAmbientMediaPlaying == 3) {
+        if (mAmbientMediaPlaying == 2) {
             mDozeServiceHost.fireNotificationMedia();
         }
     }
@@ -1967,13 +1971,15 @@ public class StatusBar extends SystemUI implements DemoMode,
             if (mNavigationBar != null) {
                 mNavigationBar.setPulseColors(n.isColorizedMedia(), colors);
             }
+            Icon icon = n.getOriginalLargeIcon();
+            Drawable drawable = null;
+            if (icon != null) {
+                drawable = icon.loadDrawable(mContext);
+            }
             if (mSlimRecents != null) {
-                Icon icon = n.getOriginalLargeIcon();
-                Drawable drawable = null;
-                if (icon != null) {
-                    drawable = icon.loadDrawable(mContext);
-                }
                 mSlimRecents.setMedia(n.isColorizedMedia(), colors, drawable, mMediaMetadata, title, text);
+            } else {
+                mRecents.setMedia(n.isColorizedMedia(), colors, drawable, mMediaMetadata, title, text);
             }
         }
     }
@@ -5266,16 +5272,28 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     }
 
-    // Switches theme accent from to another or back to stock
+    // Switches theme accent from one to another or back to stock
     public void updateAccents() {
         int accentSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
                 Settings.System.ACCENT_PICKER, 0, mCurrentUserId);
         ThemeAccentUtils.updateAccents(mOverlayManager, mCurrentUserId, accentSetting);
     }
 
-    // Unload all the theme accents
+    // Unload all the theme accents overlays
     public void unloadAccents() {
         ThemeAccentUtils.unloadAccents(mOverlayManager, mCurrentUserId);
+    }
+
+    // Switches the analog clock from one to another or back to stock
+    public void updateClocks() {
+        int clockSetting = Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.LOCKSCREEN_CLOCK_SELECTION, 0, mCurrentUserId);
+        ThemeAccentUtils.updateClocks(mOverlayManager, mCurrentUserId, clockSetting, mContext);
+    }
+
+    // Unload all the analog overlays
+    public void unloadClocks() {
+        ThemeAccentUtils.unloadClocks(mOverlayManager, mCurrentUserId, mContext);
     }
 
     private void updateDozingState() {
@@ -6133,7 +6151,7 @@ public class StatusBar extends SystemUI implements DemoMode,
                         // Otherwise just show the always-on screen.
                         setPulsing(pulsingEntries);
                     }
-                    setOnPulseEvent((mAmbientMediaPlaying == 3 ? reason : -1), true);
+                    setOnPulseEvent((mAmbientMediaPlaying == 2 ? reason : -1), true);
                 }
 
                 @Override
@@ -6592,8 +6610,12 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_ALARM)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_CLOCK)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.HIDE_LOCKSCREEN_DATE)) ||
-                    uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_CLOCK_SELECTION)) ||
                     uri.equals(Settings.System.getUriFor(Settings.System.LOCKSCREEN_DATE_SELECTION))) {
+                updateKeyguardStatusSettings();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.LOCKSCREEN_CLOCK_SELECTION))) {
+                unloadClocks();
+                updateClocks();
                 updateKeyguardStatusSettings();
             }
         }
@@ -6656,7 +6678,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
     private void setForceAmbient() {
         mAmbientMediaPlaying = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.FORCE_AMBIENT_FOR_MEDIA, 0,
+                Settings.System.FORCE_AMBIENT_FOR_MEDIA, 2,
                 UserHandle.USER_CURRENT);
         if (isAmbientContainerAvailable()) {
             ((AmbientIndicationContainer)mAmbientIndicationContainer).setIndication(mMediaMetadata, null);
