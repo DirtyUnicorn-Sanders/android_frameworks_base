@@ -586,6 +586,50 @@ public class KeyguardStatusView extends GridLayout {
         if (lockClockFont == 26) {
             mClockView.setTypeface(Typeface.create("unionfont", Typeface.NORMAL));
         }
+        if (lockClockFont == 27) {
+            mClockView.setTypeface(Typeface.create("adamcg-pro", Typeface.NORMAL));
+        }
+        if (lockClockFont == 28) {
+            mClockView.setTypeface(Typeface.create("alexana-neue", Typeface.NORMAL));
+        }
+        if (lockClockFont == 29) {
+            mClockView.setTypeface(Typeface.create("azedo-light", Typeface.NORMAL));
+        }
+        if (lockClockFont == 30) {
+            mClockView.setTypeface(Typeface.create("bignoodle-regular", Typeface.NORMAL));
+        }
+        if (lockClockFont == 31) {
+            mClockView.setTypeface(Typeface.create("cocobiker", Typeface.NORMAL));
+        }
+        if (lockClockFont == 32) {
+            mClockView.setTypeface(Typeface.create("fester", Typeface.NORMAL));
+        }
+        if (lockClockFont == 33) {
+            mClockView.setTypeface(Typeface.create("jacklane", Typeface.NORMAL));
+        }
+        if (lockClockFont == 34) {
+            mClockView.setTypeface(Typeface.create("monad", Typeface.NORMAL));
+        }
+        if (lockClockFont == 35) {
+            mClockView.setTypeface(Typeface.create("noir", Typeface.NORMAL));
+        }
+        if (lockClockFont == 36) {
+            mClockView.setTypeface(Typeface.create("northfont", Typeface.NORMAL));
+        }
+        if (lockClockFont == 37) {
+            mClockView.setTypeface(Typeface.create("qontra", Typeface.NORMAL));
+        }
+        if (lockClockFont == 38) {
+            mClockView.setTypeface(Typeface.create("the-outbox", Typeface.NORMAL));
+        }
+        if (lockClockFont == 39) {
+            mClockView.setTypeface(Typeface.create("instruction", Typeface.NORMAL));
+        }
+
+        if (lockClockFont == 40) {
+            mClockView.setTypeface(Typeface.create("outrun-future", Typeface.NORMAL));
+        }
+
 
         // Pimp my LockScreen date & alarm Fonts
         if (lockDateFont == 0) {
@@ -696,6 +740,62 @@ public class KeyguardStatusView extends GridLayout {
             mDateView.setTypeface(Typeface.create("themeable-date", Typeface.NORMAL));
             mAlarmStatusView.setTypeface(Typeface.create("themeable-date", Typeface.NORMAL));
         }
+        if (lockDateFont == 27) {
+            mDateView.setTypeface(Typeface.create("bignoodle-italic", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("bignoodle-italic", Typeface.NORMAL));
+        }
+        if (lockDateFont == 28) {
+            mDateView.setTypeface(Typeface.create("blern", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("blern", Typeface.NORMAL));
+        }
+        if (lockDateFont == 29) {
+            mDateView.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));
+        }
+        if (lockDateFont == 30) {
+            mDateView.setTypeface(Typeface.create("metropolis1920", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("metropolis1920", Typeface.NORMAL));
+        }
+        if (lockDateFont == 31) {
+            mDateView.setTypeface(Typeface.create("neonneon", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("neonneon", Typeface.NORMAL));
+        }
+        if (lockDateFont == 32) {
+            mDateView.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));
+        }
+        if (lockDateFont == 33) {
+            mDateView.setTypeface(Typeface.create("snowstrom-sys", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("snowstrom-sys", Typeface.NORMAL));
+        }
+        if (lockDateFont == 34) {
+            mDateView.setTypeface(Typeface.create("unionfont", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("unionfont", Typeface.NORMAL));
+        }
+        if (lockDateFont == 35) {
+            mDateView.setTypeface(Typeface.create("alexana-neue", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("alexana-neue", Typeface.NORMAL));
+        }
+        if (lockDateFont == 36) {
+            mDateView.setTypeface(Typeface.create("azedo-light", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("azedo-light", Typeface.NORMAL));
+        }
+        if (lockDateFont == 37) {
+            mDateView.setTypeface(Typeface.create("cocobiker", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("cocobiker", Typeface.NORMAL));
+        }
+        if (lockDateFont == 38) {
+            mDateView.setTypeface(Typeface.create("fester", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("fester", Typeface.NORMAL));
+        }
+        if (lockDateFont == 39) {
+            mDateView.setTypeface(Typeface.create("northfont", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("northfont", Typeface.NORMAL));
+        }
+        if (lockDateFont == 40) {
+            mDateView.setTypeface(Typeface.create("qontra", Typeface.NORMAL));
+            mAlarmStatusView.setTypeface(Typeface.create("qontra", Typeface.NORMAL));
+        }
 
         // Pimp my LockScreen ownerInfo Fonts
         if (lockOwnerFont == 0) {
@@ -788,8 +888,40 @@ public class KeyguardStatusView extends GridLayout {
         if (lockOwnerFont == 29) {
             mOwnerInfo.setTypeface(Typeface.create("unionfont", Typeface.NORMAL));
         }
+        if (lockOwnerFont == 30) {
+            mOwnerInfo.setTypeface(Typeface.create("bignoodle-italic", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 31) {
+            mOwnerInfo.setTypeface(Typeface.create("blern", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 32) {
+            mOwnerInfo.setTypeface(Typeface.create("gobold-light-sys", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 33) {
+            mOwnerInfo.setTypeface(Typeface.create("inkferno", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 34) {
+            mOwnerInfo.setTypeface(Typeface.create("metropolis1920", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 35) {
+            mOwnerInfo.setTypeface(Typeface.create("neonneon", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 36) {
+            mOwnerInfo.setTypeface(Typeface.create("riviera", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 37) {
+            mOwnerInfo.setTypeface(Typeface.create("roadrage-sys", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 38) {
+            mOwnerInfo.setTypeface(Typeface.create("instruction", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 39) {
+            mOwnerInfo.setTypeface(Typeface.create("outrun-future", Typeface.NORMAL));
+        }
+        if (lockOwnerFont == 40) {
+            mOwnerInfo.setTypeface(Typeface.create("snowstrom-sys", Typeface.NORMAL));
     }
-
+}
     // LockscreenColors
     private void lockscreenColors() {
         final ContentResolver resolver = getContext().getContentResolver();
